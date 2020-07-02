@@ -11,21 +11,17 @@ import androidx.appcompat.widget.SearchView
 import com.elchuy.podplay.R
 import com.elchuy.podplay.repository.ItunesRepo
 import com.elchuy.podplay.service.ItunesService
+import kotlinx.android.synthetic.main.activity_podcast.*
 
 class PodcastActivity : AppCompatActivity() {
 
-    val TAG = javaClass.simpleName
+    private val tag = javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_podcast)
 
-//        val itunesService = ItunesService.instance
-//        val itunesRepo = ItunesRepo(itunesService)
-//
-//        itunesRepo.searchByTerm("Android Developer") {
-//            Log.i(TAG, "Results = $it")
-//        }
+        setupToolbar()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,14 +48,18 @@ class PodcastActivity : AppCompatActivity() {
         val itunesRepo = ItunesRepo(itunesService)
 
         itunesRepo.searchByTerm(term) {
-            Log.i(TAG, "Results: $it")
+            Log.i(tag, "Results: $it")
         }
     }
 
     private fun handleIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
-            performSearch(query)
+            performSearch(query!!)
         }
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
     }
 }
