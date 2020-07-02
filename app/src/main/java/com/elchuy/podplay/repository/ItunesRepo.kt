@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ItunesRepo(private val itunesService: ItunesService) {
-    fun searchByTerm(term: String, callBack: (List<PodcastResponse.ItunesPodcast>?) -> Int) {
+    fun searchByTerm(term: String, callBack: (List<PodcastResponse.ItunesPodcast>?) -> Unit) {
         val podcastCall = itunesService.searchPodcastByTerm(term)
 
         podcastCall.enqueue(object : Callback<PodcastResponse>{
