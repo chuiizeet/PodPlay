@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.elchuy.podplay.repository.ItunesRepo
 import com.elchuy.podplay.service.PodcastResponse
 
-class SerchViewModel(application: Application) : AndroidViewModel(application) {
+class SearchViewModel(application: Application) : AndroidViewModel(application) {
     var itunesRepo: ItunesRepo? = null
 
     data class PodcastSummaryViewData(
@@ -24,7 +24,7 @@ class SerchViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
-    fun searchPodcast(term: String, callback: (List<PodcastSummaryViewData>) -> UInt) {
+    fun searchPodcast(term: String, callback: (List<PodcastSummaryViewData>) -> Unit) {
         itunesRepo?.searchByTerm(term) { resutls ->
             if (resutls == null) {
                 callback(emptyList())
